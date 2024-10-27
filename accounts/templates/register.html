@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Zarejestruj się!
+{% endblock %}
+
+{% block content %}
+
+    <h1>Zarejestruj się!</h1>
+
+    <form method='post'>
+        {% csrf_token %}
+
+        {{ form.username.label }} {{ form.username }}
+        
+        <br>
+        
+        {{ form.email.label }} {{ form.email }}
+        
+        <br>
+        
+        {{ form.password1.label }} {{ form.password1 }}
+        
+        <br>
+        
+        {{ form.password2.label }} {{ form.password2 }}
+
+        <br>
+
+        <button type="submit">Zarejestruj się</button>
+    </form>
+
+{% if messages %}
+    <ul>
+        {% for message in messages %}
+            <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+{% endblock %}
