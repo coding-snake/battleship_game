@@ -8,17 +8,21 @@
 
     <h1>Zaloguj się!</h1>
 
-    <form method='post'>
-        {% csrf_token %}
+    {% if not request.user.is_authenticated %}
+        <form method='post'>
+            {% csrf_token %}
 
-        {{form.username_or_email.label}} {{form.username_or_email}}
-        
-        <br>
+            {{form.username_or_email.label}} {{form.username_or_email}}
+            
+            <br>
 
-        {{form.password.label}} {{form.password}}
-        <br>
+            {{form.password.label}} {{form.password}}
+            <br>
 
-        <button type="submit">Zaloguj się</button>
-    </form>
-
+            <button type="submit">Zaloguj się</button>
+        </form>
+    {% else %}
+        <p>Jesteś już zalogowan(a/y) jako: {{ user.get_username }}</p>
+    {% endif %}
+    
 {% endblock %}

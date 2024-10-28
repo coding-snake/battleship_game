@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from .forms import CreateUserForm, LoginUserForm
 from .auth_back import auth_with_email_or_username
@@ -52,3 +52,9 @@ def login_view(request):
         
     context = {'form' : form}
     return render(request, 'login.html', context)
+
+def logout_view(request):
+    if request.method == "POST":
+        logout(request)
+        return redirect('home')
+    return render(request, 'logout.html')
