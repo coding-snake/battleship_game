@@ -1,13 +1,16 @@
 from django.contrib import messages
+from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
-from .forms import CreateUserForm
+from .forms import CreateUserForm, LoginUserForm
+from .auth_back import auth_with_email_or_username
+
 # Create your views here.
 
 def accounts_view(request):
     context = {}
     return render(request, 'accounts.html', context)
 
-def register(request):
+def register_view(request):
     form = CreateUserForm()
 
     if request.method == 'POST':
@@ -23,3 +26,29 @@ def register(request):
 
     context = {'form' : form}
     return render(request, 'register.html', context)
+
+def login_view(request):
+    form = LoginUserForm()
+
+    if request.method == 'POST':
+        form = LoginUserForm(request.POST)
+        if form.is_valid():
+            username_or_email = request.POST.get('username_or_email')
+            password = request.POST.get('password')
+
+            authenticator = auth_with_email_or_username()
+            user = authenticator.authenticate(request=request, username_or_email=username_or_email, password=password)
+
+            try:
+                login(request, user, backend='accounts.auth_back.auth_with_email_or_username')
+            except Exception as e:
+                messages.error(request, e)
+
+            if user is not None:
+                login(request, user, backend='accounts.auth_back.auth_with_email_or_username')
+                return redirect('home')
+            else:
+                messages.error(request, "Użytkownik nie znaleziony")
+        
+    context = {'form' : form}
+    return render(request, 'login.html', context)

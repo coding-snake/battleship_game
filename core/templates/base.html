@@ -15,6 +15,7 @@
             <ul class="menu">
                 <li class="{% if request.path == '/' %}active{% endif %}"><a href="{% url 'home' %}">Strona główna</a></li>
                 <li class="{% if request.path == '/accounts/' %}active{% endif %}"><a href="{% url 'accounts' %}">Konto</a></li>
+                <li class="{% if request.path == '/admin/' %}active{% endif %}"><a href="{% url 'admin:index' %}">Konsola admina</a></li>
             </ul>
         </nav>
 

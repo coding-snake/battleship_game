@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Zaloguj się!
+{% endblock %}
+
+{% block content %}
+
+    <h1>Zaloguj się!</h1>
+
+    <form method='post'>
+        {% csrf_token %}
+
+        {{form.username_or_email.label}} {{form.username_or_email}}
+        
+        <br>
+
+        {{form.password.label}} {{form.password}}
+        <br>
+
+        <button type="submit">Zaloguj się</button>
+    </form>
+
+{% endblock %}
