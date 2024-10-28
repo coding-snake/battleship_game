@@ -3,6 +3,10 @@ from django.shortcuts import render, redirect
 from .forms import CreateUserForm
 # Create your views here.
 
+def accounts_view(request):
+    context = {}
+    return render(request, 'accounts.html', context)
+
 def register(request):
     form = CreateUserForm()
 
