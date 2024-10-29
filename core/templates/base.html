@@ -15,7 +15,16 @@
             <ul class="menu">
                 <li class="{% if request.path == '/' %}active{% endif %}"><a href="{% url 'home' %}">Strona główna</a></li>
                 <li class="{% if request.path == '/accounts/' %}active{% endif %}"><a href="{% url 'accounts' %}">Konto</a></li>
-                <li class="{% if request.path == '/admin/' %}active{% endif %}"><a href="{% url 'admin:index' %}">Konsola admina</a></li>
+
+                <li class="right"><a href="{% url 'admin:index' %}">Konsola admina</a></li>
+                <li class="{% if request.path == '/accounts/register/' %}active{% endif %} right"><a href="{% url 'register' %}">Zarejestruj się</a></li>
+            
+                {% if request.user.is_authenticated %}
+                    <li class="{% if request.path == '/accounts/logout/' %}active{% endif %} right "><a href="{% url 'logout' %}">Wyloguj się</a></li>
+                {% else %}
+                    <li class="{% if request.path == '/accounts/login/' %}active{% endif %} right"><a href="{% url 'login' %}">Zaloguj się</a></li>
+                {% endif %}
+                    
             </ul>
         </nav>
 

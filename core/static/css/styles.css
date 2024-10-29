@@ -25,6 +25,10 @@ ul.menu li {
     font-size: 16px;
 }
 
+ul.menu li.right {
+    float: right;
+}
+
 ul.menu li a {
     display: block;
     text-decoration: none;
