@@ -39,11 +39,6 @@ def login_view(request):
             authenticator = auth_with_email_or_username()
             user = authenticator.authenticate(request=request, username_or_email=username_or_email, password=password)
 
-            try:
-                login(request, user, backend='accounts.auth_back.auth_with_email_or_username')
-            except Exception as e:
-                messages.error(request, e)
-
             if user is not None:
                 login(request, user, backend='accounts.auth_back.auth_with_email_or_username')
                 return redirect('home')

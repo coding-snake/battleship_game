@@ -43,3 +43,52 @@ ul.menu li:hover {
 ul.menu li.active {
     background-color: #d74a49;
 }
+
+.messages {
+    list-style-type: none;
+    padding: 0;
+    margin: 10px 0;
+}
+
+.messages li {
+    margin-bottom: 5px;
+}
+
+.message {
+    padding: 15px;
+    background-color: #183e4b;
+    color: #eaeaea;
+    display: block;
+    width: 100%;
+    line-height: 30px;
+    border-radius: 25px;
+    border: none;
+}
+
+.message.success {
+    background-color: #3b8821;
+    color: #eaeaea;
+}
+
+.message.error {
+    background-color: #e9c420;
+    color: black;
+}
+
+.message.info {
+    background-color: #5749d7;
+    color: #eaeaea;
+}
+
+.message.warning {
+    background-color: #d74a49;
+    color: #eaeaea;
+}
+
+div.content {
+    padding: 20px;
+}
+
+span.code-line {
+    font-family: 'Courier New', Courier, monospace;
+}

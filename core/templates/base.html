@@ -14,7 +14,13 @@
         <nav>
             <ul class="menu">
                 <li class="{% if request.path == '/' %}active{% endif %}"><a href="{% url 'home' %}">Strona główna</a></li>
-                <li class="{% if request.path == '/accounts/' %}active{% endif %}"><a href="{% url 'accounts' %}">Konto</a></li>
+                <li class="{% if request.path == '/accounts/' %}active{% endif %}"><a href="{% url 'accounts' %}">
+                    {% if request.user.is_authenticated %}
+                        {{ user.username }}
+                    {% else %}
+                        Konto
+                    {% endif %}
+                </a></li>
 
                 <li class="right"><a href="{% url 'admin:index' %}">Konsola admina</a></li>
                 <li class="{% if request.path == '/accounts/register/' %}active{% endif %} right"><a href="{% url 'register' %}">Zarejestruj się</a></li>
@@ -28,13 +34,16 @@
             </ul>
         </nav>
 
-        {% block content %}
-        {% endblock %}
-
+        <div class="content">
+            {% block content %}
+            {% endblock %}
+        </div>
         {% if messages %}
-            <ul>
+            <ul class="messages">
                 {% for message in messages %}
-                    <li>{{ message }}</li>
+                    <li>
+                        <div class="message {{ message.tags }}">{{ message }}</div>
+                    </li>
                 {% endfor %}
             </ul>
         {% endif %}

@@ -6,6 +6,9 @@
 
 {% block content %}
 
-    <h1>Konto</h1>
-
+    {% if request.user.is_authenticated %}
+        <h1>Konto użytkownika: <span class="code-line">{{ user.username }}</span></h1>
+    {% else %}
+        Nie jesteś zalogowany!
+    {% endif %}
 {% endblock %}
